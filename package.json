@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon --watch 'src/' -e ts --exec 'ts-node' src/server.ts",
-    "compile": "npx tsc",
-    "start": "node ./dist/server.js",
+    "start": "tsc && node dist/app.js",
+    "start:dev": "nodemon - exec 'ts-node' src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
