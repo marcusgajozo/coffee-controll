@@ -1,7 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
+import { PlanRepository } from "../repositories/PlanRepository";
 
 const getAll = async (req: Request, res: Response) => {
-  res.send("getAll");
+  const plans = await PlanRepository.getAll();
+  res.status(200).json(plans);
 };
 
 const getById = async (req: Request, res: Response) => {
