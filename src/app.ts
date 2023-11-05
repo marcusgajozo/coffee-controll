@@ -4,6 +4,17 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import { PlanRouter } from "./routers/PlanRouter";
+import { myDataSource } from "./database/data-source";
+
+// establish database connection
+myDataSource
+  .initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((err: any) => {
+    console.error("Error during Data Source initialization:", err);
+  });
 
 export const app = express();
 
