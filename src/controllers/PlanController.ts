@@ -20,7 +20,7 @@ const deleteById = async (req: Request, res: Response) => {
   res.send("deleteById");
 };
 
-export const PlansController = {
+export const PlanController = {
   getAll,
   getById,
   update,
