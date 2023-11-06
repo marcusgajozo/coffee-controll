@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import { PlanRouter } from "./routers/PlanRouter";
-import { myDataSource } from "./database/data-source";
+import { myDataSource } from "../database/data-source";
 
 // establish database connection
 myDataSource

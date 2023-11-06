@@ -1,5 +1,5 @@
-import { PlanDTO } from "src/dtos/PlanDTO";
-import { myDataSource } from "../database/data-source";
+import { PlanDTO } from "src/app/dtos/PlanDTO";
+import { myDataSource } from "../../database/data-source";
 import { Plan } from "../entities/Plan";
 
 const repository = myDataSource.getRepository(Plan);
