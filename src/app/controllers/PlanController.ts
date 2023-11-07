@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { validate } from "class-validator";
 
 import { PlanRepository } from "../repositories/PlanRepository";
-import { PlanDTO } from "src/app/dtos/PlanDTO";
 
 const getAll = async (req: Request, res: Response) => {
   const plans = await PlanRepository.getAll();
