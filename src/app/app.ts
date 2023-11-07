@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 
-import { planRouter } from "./routers/planRouter1";
+import { planRouter } from "./routers/planRouter";
 import { myDataSource } from "../database/data-source";
 import { signatureRouter } from "./routers/signatureRouter";
 
