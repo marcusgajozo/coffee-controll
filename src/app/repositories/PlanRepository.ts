@@ -35,14 +35,17 @@ const update = async (id: string, planData: Partial<Plan>) => {
 };
 
 const deleteById = async (id: string) => {
-  const existingPlan = await repository.findOne({ where: { id } });
+  try {
+    const existingPlan = await repository.findOne({ where: { id } });
+    if (existingPlan) {
+      await repository.remove(existingPlan);
+      return true;
+    }
 
-  if (existingPlan) {
-    await repository.remove(existingPlan);
-    return true;
+    return existingPlan;
+  } catch (error) {
+    throw new Error("Id inválido.");
   }
-
-  return existingPlan;
 };
 
 export const PlanRepository = {
