@@ -1,12 +1,13 @@
 import { Signature } from "../entities/Signature";
 import { SignatureRepository } from "../repositories/SignatureRepository";
 import * as yup from "yup";
+import { planService } from "./planService";
 
 const bodyValidation = yup.object().shape({
   active: yup.boolean().required(),
-  registration_date: yup.date().required(),
   id_user: yup.string().required(),
-  id_plan: yup.string().required(),
+  plan: yup.string().required(),
+  durationMonths: yup.number().required(),
 });
 
 const getAll = async () => {
@@ -34,10 +35,15 @@ const update = async (id: string, signatureData: Partial<Signature>) => {
   }
 };
 
-const create = async (signatureData: Partial<Signature>) => {
+const create = async (signatureData: Partial<Signature>, planId: string) => {
   try {
     await bodyValidation.validate(signatureData);
-    return await SignatureRepository.create(signatureData);
+    const plan = await planService.getById(planId);
+    if (plan !== null) {
+      return await SignatureRepository.create(signatureData);
+    } else {
+      throw new Error("Plano não encontrado!");
+    }
   } catch (error: any) {
     throw new Error(error?.message || "Erro ao criar assinatura.");
   }
@@ -51,10 +57,23 @@ const deleteById = async (id: string) => {
   }
 };
 
+const cancelSubscription = async (id: string) => {
+  try {
+    const signature = getById(id);
+    if (signature !== null) {
+      const updatedSignature = { ...signature, active: false };
+      return SignatureRepository.update(id, updatedSignature);
+    }
+  } catch (error: any) {
+    throw new Error(error?.message || "Erro ao cancelar assinatura.");
+  }
+};
+
 export const signatureService = {
   getAll,
   getById,
   update,
   create,
   deleteById,
+  cancelSubscription,
 };

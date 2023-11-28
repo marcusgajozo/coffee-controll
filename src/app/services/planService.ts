@@ -3,7 +3,6 @@ import { PlanRepository } from "../repositories/PlanRepository";
 import * as yup from "yup";
 
 const bodyValidation = yup.object().shape({
-  durationMonths: yup.number().required(),
   price_in_cents: yup.number().required(),
   description: yup.string().required(),
   name: yup.string().required(),
@@ -45,6 +44,7 @@ const create = async (planData: Partial<Plan>) => {
 
 const deleteById = async (id: string) => {
   try {
+    // TODO: Verificar se não tem ninguém assinando o plano
     return await PlanRepository.deleteById(id);
   } catch (error: any) {
     throw new Error(error?.message || "Erro ao deletar plano.");

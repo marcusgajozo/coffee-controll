@@ -11,4 +11,6 @@ signatureRouter.post("/", SignatureController.create);
 
 signatureRouter.put("/:id", SignatureController.update);
 
+signatureRouter.put("/cancel/:id", SignatureController.cancelSubscription);
+
 signatureRouter.delete("/:id", SignatureController.deleteById);

@@ -20,9 +20,6 @@ export class Plan {
   @Column("int")
   price_in_cents: number;
 
-  @Column("int")
-  durationMonths: number;
-
   @CreateDateColumn()
   created_at: Date;
 

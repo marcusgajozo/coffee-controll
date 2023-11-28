@@ -46,15 +46,16 @@ const update = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   try {
     const signatureData = req.body;
-    const createdSignature = await signatureService.create(signatureData);
+    const createdSignature = await signatureService.create(
+      signatureData,
+      signatureData?.plan
+    );
     res.status(201).json(createdSignature);
   } catch (error: any) {
-    res
-      .status(400)
-      .json({
-        error: true,
-        message: error?.message || "Erro ao criar assinatura.",
-      });
+    res.status(400).json({
+      error: true,
+      message: error?.message || "Erro ao criar assinatura.",
+    });
   }
 };
 
@@ -74,7 +75,19 @@ const deleteById = async (req: Request, res: Response) => {
   }
 };
 
-const cancelSubscription = async () => {};
+const cancelSubscription = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const cancelSignature = await signatureService.cancelSubscription(id);
+    if (!cancelSignature) {
+      res.status(404).json({ message: "Assinatura não encontrado." });
+    } else {
+      res.status(200).json({ message: "Assinatura excluído com sucesso." });
+    }
+  } catch (error: any) {
+    res.status(400).json({ error: true, message: error?.message });
+  }
+};
 
 export const SignatureController = {
   getAll,
