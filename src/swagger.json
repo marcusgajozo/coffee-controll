@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API de Assinaturas",
+    "description": "API para gerenciar assinaturas de usuários."
+  },
+  "paths": {
+    "/desativar-assinaturas-expiradas": {
+      "post": {
+        "summary": "Desativar assinaturas expiradas",
+        "description": "Esta rota desativa assinaturas expiradas no sistema.",
+        "responses": {
+          "200": {
+            "description": "Assinaturas expiradas desativadas com sucesso.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Assinaturas expiradas desativadas com sucesso."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao desativar assinaturas expiradas.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Erro ao desativar assinaturas expiradas."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
